@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Moments in Bloom</title>
+    <title>A Story For You 🌸</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -11,50 +11,68 @@
     <div class="sparkles-container" id="sparkles"></div>
 
     <div class="main-container">
-        
+
         <div id="page1" class="page active">
+            <div class="page-content center">
+                <img src="my-peonies.avif" class="cover-peony" alt="Peony">
+                <h1>A story for you, Brooke.</h1>
+                <button class="primary-btn" onclick="goToPage(2)">Open Your Gift →</button>
+            </div>
+        </div>
+
+        <div id="page2" class="page">
             <div class="page-content">
                 <h2>Moments in Bloom ✨</h2>
                 <p>Click the glass dome to lift the shield and see your surprise...</p>
                 
                 <div class="dome-stage">
-                    <div class="premium-glass-card" id="glassCard">
-                        <div class="glass-glow-effect"></div>
-                        <div class="glass-inner-border"></div>
-                        
-                        <img src="20260522053434_file_6a0feaea87dec.avif" alt="Peonies" class="peony-bouquet-img">
-                        
-                        <div class="card-shimmer"></div>
+                    <div class="dome-container" id="domeContainer" onclick="unlockDome()">
+                        <div class="glass-dome">
+                            <div class="glass-reflection"></div>
+                        </div>
+                        <div class="dome-knob"></div>
+                        <img src="my-peonies.avif" class="peony-bouquet-img" alt="Peonies for Kitkat">
+                        <div class="dome-base"></div>
                     </div>
                 </div>
 
-                <button class="primary-btn" id="startStoryBtn">Continue Story</button>
+                <button id="nextPageBtn" class="primary-btn hidden" onclick="goToPage(3)">Next Page →</button>
             </div>
         </div>
 
-        <div id="page2" class="page">
-            <div class="game-viewport" id="viewport">
-                <div class="cinematic-bg"></div>
+        <div id="page3" class="page">
+            <div class="page-content">
+                <h2>Our Chapters</h2>
+                <div class="chapters-grid">
+                    <button class="chapter-btn" onclick="openMessage('chapter1')">Chapter 1</button>
+                    <button class="chapter-btn" onclick="openMessage('chapter2')">Chapter 2</button>
+                    <button class="chapter-btn" onclick="openMessage('chapter3')">Chapter 3</button>
+                </div>
+                <div class="hint">Open all three chapters to unlock the special surprise 🎀</div>
+                <button id="finalPageBtn" class="primary-btn hidden" onclick="goToPage(5)">Unlock Surprise ✨</button>
+            </div>
+        </div>
+
+        <div id="page5" class="page">
+            <div class="game-viewport 3d-perspective" id="gameViewport">
                 
-                <div class="real-sun"></div>
+                <div class="cinematic-bg">
+                    <div class="real-sun"></div>
+                </div>
+                
                 <div class="mountain-ledge"></div>
 
-                <div class="game-choices hidden" id="choicesPanel">
-                    <button class="choice-btn accept" id="acceptBtn">Accept Them ❤️</button>
-                    <button class="choice-btn deny" id="denyBtn">Deny 😭</button>
-                </div>
-
                 <div class="characters-stage">
-                    <div class="pixel-character-wrapper boy-char" id="boyChar">
-                        <img src="20260522053434_file_6a0feaea87dec.avif" alt="Flower Bubble" class="popup-flower hidden" id="flowerBubble">
+                    <div class="pixel-character-wrapper boy-char" id="boyCharacter">
                         <div class="custom-boy-avatar">
                             <div class="avatar-hair"></div>
                             <div class="avatar-face"></div>
                             <div class="avatar-suit"><div class="avatar-tie"></div></div>
                         </div>
+                        <img src="my-peonies.avif" class="popup-flower hidden" id="pixelPeony" alt="Gift">
                     </div>
 
-                    <div class="pixel-character-wrapper girl-char" id="girlChar">
+                    <div class="pixel-character-wrapper girl-char hidden" id="girlCharacter">
                         <div class="custom-girl-avatar">
                             <div class="girl-hair"></div>
                             <div class="avatar-face"></div>
@@ -62,16 +80,40 @@
                         </div>
                     </div>
                 </div>
+                
+                <div class="pov-overlay" id="girlView"></div>
 
-                <div class="dialogue-box" id="dialogueBox">
-                    <div class="dialogue-speaker" id="speakerName">PEANUT</div>
-                    <div class="dialogue-text" id="dialogueText">Loading story view... Click anywhere to proceed.</div>
-                    <div class="dialogue-arrow">▼</div>
+                <div class="game-choices hidden" id="gameChoices">
+                    <button class="choice-btn accept" onclick="chooseEnding('accept')">Accept Them 💖</button>
+                    <button class="choice-btn deny" onmouseover="dodgeButton(this)" onclick="chooseEnding('deny')">Deny 😭</button>
                 </div>
 
+                <div class="dialogue-box" id="dialogueBox" onclick="advanceDialogue()">
+                    <div class="dialogue-speaker">Peanut</div>
+                    <div class="dialogue-text" id="dialogueText">Loading memory loop...</div>
+                    <div class="dialogue-arrow">▼</div>
+                </div>
             </div>
         </div>
 
+        <div id="page4" class="page">
+            <div class="page-content center">
+                <img src="my-peonies.avif" class="cover-peony" style="width:130px; height:130px;" alt="Peony">
+                <div class="text-block">
+                    <p style="font-size: 1.6rem; font-weight: bold; color: var(--text-color); margin-bottom: 5px; letter-spacing: 0.5px;">THANK YOU FOR EVERYTHING KITKAT &lt;3</p>
+                    <p style="color: #665; font-size: 1.05rem;">You are my absolute favorite blessing.</p>
+                    <p class="signature">Forever Yours, Peanut 🎀</p>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div id="messageModal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeMessage()">&times;</span>
+            <div id="modalBody"></div>
+        </div>
     </div>
 
     <script src="script.js"></script>
