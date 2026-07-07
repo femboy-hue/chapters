@@ -12,30 +12,38 @@
 
     <div class="main-container">
 
+        <!-- PAGE 1: The Cover -->
         <div id="page1" class="page active">
             <div class="page-content center">
-                <img src="https://images.unsplash.com/photo-1561181286-d3fee7d55364?q=80&w=400&auto=format&fit=crop" class="peony-img" style="position:static; transform:none; animation:none; margin-bottom:20px; width:150px; border-radius:50%;" alt="Peony">
+                <img src="https://images.unsplash.com/photo-1596436889106-be35e843f974?q=80&w=400&auto=format&fit=crop" class="cover-peony" alt="Peony">
                 <h1>A story for you, Brooke.</h1>
                 <button class="primary-btn" onclick="goToPage(2)">Open Your Gift →</button>
             </div>
         </div>
 
+        <!-- PAGE 2: The Glass Dome Secret Garden (FIXED) -->
         <div id="page2" class="page">
             <div class="page-content">
                 <h2>Moments in Bloom ✨</h2>
-                <p>Click the glass dome to lift the shield and see your favorite flower...</p>
+                <p>Click the glass dome to lift the shield and see your surprise...</p>
                 
-                <div class="dome-container" id="domeContainer" onclick="unlockDome()">
-                    <div class="dome-knob"></div>
-                    <div class="glass-dome"></div>
-                    <img src="https://i.ibb.co/VWVgCgM/peony-isolated.png" class="peony-img" alt="Eternal Peony">
-                    <div class="dome-base"></div>
+                <div class="dome-stage">
+                    <div class="dome-container" id="domeContainer" onclick="unlockDome()">
+                        <div class="glass-dome">
+                            <div class="glass-reflection"></div>
+                        </div>
+                        <div class="dome-knob"></div>
+                        <!-- Your exact premium pink peony bouquet -->
+                        <img src="https://images.unsplash.com/photo-1596436889106-be35e843f974?q=80&w=600&auto=format&fit=crop" class="peony-bouquet-img" alt="Peonies for Kitkat">
+                        <div class="dome-base"></div>
+                    </div>
                 </div>
 
                 <button id="nextPageBtn" class="primary-btn hidden" onclick="goToPage(3)">Next Page →</button>
             </div>
         </div>
 
+        <!-- PAGE 3: The Message Chapters -->
         <div id="page3" class="page">
             <div class="page-content">
                 <h2>Our Chapters</h2>
@@ -49,40 +57,56 @@
             </div>
         </div>
 
+        <!-- PAGE 5: Enhanced 3D Cinematic Mountain Sunset Theater -->
         <div id="page5" class="page">
-            <div class="game-viewport" id="gameViewport">
-                <div class="pixel-sky">
-                    <div class="pixel-sun"></div>
-                </div>
-                <div class="pixel-mountains"></div>
-                <div class="pixel-ground" id="pixelGround"></div>
-
-                <div class="pixel-character boy-walk" id="boyCharacter">
-                    <div class="boy-sprite"></div>
-                    <div class="pixel-peony hidden" id="pixelPeony">🌸</div>
+            <div class="game-viewport 3d-perspective" id="gameViewport">
+                
+                <!-- Immersive Cinematic Real Mountain Sunset Background Layer -->
+                <div class="cinematic-bg">
+                    <div class="sun-glare"></div>
                 </div>
                 
-                <div class="pixel-character girl-firstperson" id="girlView"></div>
+                <!-- 3D Mountain Peak Horizon Edge Ground -->
+                <div class="mountain-ledge"></div>
 
+                <!-- Your custom character model (recreated with modern CSS layers based on your reference image) -->
+                <div class="pixel-character-wrapper" id="boyCharacter">
+                    <div class="custom-boy-avatar">
+                        <div class="avatar-hair"></div>
+                        <div class="avatar-face"></div>
+                        <div class="avatar-suit">
+                            <div class="avatar-tie"></div>
+                        </div>
+                    </div>
+                    <!-- The realistic floating peony bouquet popup -->
+                    <img src="https://images.unsplash.com/photo-1596436889106-be35e843f974?q=80&w=200&auto=format&fit=crop" class="popup-flower hidden" id="pixelPeony" alt="Gift Bouquet">
+                </div>
+                
+                <!-- First-person framing layer overlay -->
+                <div class="pov-overlay" id="girlView"></div>
+
+                <!-- Interactive Choice Prompt -->
                 <div class="game-choices hidden" id="gameChoices">
-                    <button class="choice-btn accept" onclick="chooseEnding('accept')">Accept Flower 💖</button>
+                    <button class="choice-btn accept" onclick="chooseEnding('accept')">Accept Them 💖</button>
                     <button class="choice-btn deny" onmouseover="dodgeButton(this)" onclick="chooseEnding('deny')">Deny 😭</button>
                 </div>
 
+                <!-- RPG Dialogue Dynamic Panel -->
                 <div class="dialogue-box" id="dialogueBox" onclick="advanceDialogue()">
                     <div class="dialogue-speaker">Peanut</div>
-                    <div class="dialogue-text" id="dialogueText">Loading memory sequence...</div>
+                    <div class="dialogue-text" id="dialogueText">Loading cinematic scene...</div>
                     <div class="dialogue-arrow">▼</div>
                 </div>
             </div>
         </div>
 
+        <!-- PAGE 4: Final Screen Card -->
         <div id="page4" class="page">
             <div class="page-content center">
-                <img src="https://images.unsplash.com/photo-1561181286-d3fee7d55364?q=80&w=400&auto=format&fit=crop" class="peony-img" style="position:static; transform:none; animation:none; margin-bottom:20px; width:120px; border-radius:50%;" alt="Peony">
+                <img src="https://images.unsplash.com/photo-1596436889106-be35e843f974?q=80&w=400&auto=format&fit=crop" class="cover-peony" style="width:120px; height:120px;" alt="Peony">
                 <div class="text-block">
-                    <p style="font-size: 1.4rem; font-weight: bold; color: var(--text-color);">Thank you for everything, Kitkat &lt;3</p>
-                    <p style="color: #665; margin-top: 10px;">You are my absolute favorite blessing.</p>
+                    <p style="font-size: 1.5rem; font-weight: bold; color: var(--text-color); margin-bottom: 5px;">THANK YOU FOR EVERYTHING KITKAT &lt;3</p>
+                    <p style="color: #665;">You are my absolute favorite blessing.</p>
                     <p class="signature">Forever Yours, Peanut 🎀</p>
                 </div>
             </div>
@@ -90,6 +114,7 @@
 
     </div>
 
+    <!-- Modals -->
     <div id="messageModal" class="modal">
         <div class="modal-content">
             <span class="close-btn" onclick="closeMessage()">&times;</span>
