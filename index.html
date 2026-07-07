@@ -14,7 +14,7 @@
 
         <div id="page1" class="page active">
             <div class="page-content center">
-                <div class="flower-wrapper large floating">🌸</div>
+                <img src="https://images.unsplash.com/photo-1561181286-d3fee7d55364?q=80&w=400&auto=format&fit=crop" class="peony-img" style="position:static; transform:none; animation:none; margin-bottom:20px; width:150px; border-radius:50%;" alt="Peony">
                 <h1>A story for you, Brooke.</h1>
                 <button class="primary-btn" onclick="goToPage(2)">Open Your Gift →</button>
             </div>
@@ -22,18 +22,17 @@
 
         <div id="page2" class="page">
             <div class="page-content">
-                <div class="header">
-                    <div class="flower-wrapper small">🌸</div>
-                    <h2>Moments in Bloom</h2>
-                    <div class="flower-wrapper small">🌸</div>
+                <h2>Moments in Bloom ✨</h2>
+                <p>Click the glass dome to lift the shield and see your favorite flower...</p>
+                
+                <div class="dome-container" id="domeContainer" onclick="unlockDome()">
+                    <div class="dome-knob"></div>
+                    <div class="glass-dome"></div>
+                    <img src="https://i.ibb.co/VWVgCgM/peony-isolated.png" class="peony-img" alt="Eternal Peony">
+                    <div class="dome-base"></div>
                 </div>
-                <div class="text-block">
-                    <p>
-                        I made this because peonies represent love, happiness, and beauty—just like these memories with you. 
-                        They're classic and gorgeous, which reminds me of you.
-                    </p>
-                </div>
-                <button class="primary-btn" onclick="goToPage(3)">Next Page →</button>
+
+                <button id="nextPageBtn" class="primary-btn hidden" onclick="goToPage(3)">Next Page →</button>
             </div>
         </div>
 
@@ -45,17 +44,46 @@
                     <button class="chapter-btn" onclick="openMessage('chapter2')">Chapter 2</button>
                     <button class="chapter-btn" onclick="openMessage('chapter3')">Chapter 3</button>
                 </div>
-                <div class="hint text-block">Open all three to unlock the final page 🎀</div>
-                <button id="finalPageBtn" class="primary-btn hidden" onclick="goToPage(4)">Final Page →</button>
+                <div class="hint">Open all three chapters to unlock the special surprise 🎀</div>
+                <button id="finalPageBtn" class="primary-btn hidden" onclick="goToPage(5)">Unlock Surprise ✨</button>
+            </div>
+        </div>
+
+        <div id="page5" class="page">
+            <div class="game-viewport" id="gameViewport">
+                <div class="pixel-sky">
+                    <div class="pixel-sun"></div>
+                </div>
+                <div class="pixel-mountains"></div>
+                <div class="pixel-ground" id="pixelGround"></div>
+
+                <div class="pixel-character boy-walk" id="boyCharacter">
+                    <div class="boy-sprite"></div>
+                    <div class="pixel-peony hidden" id="pixelPeony">🌸</div>
+                </div>
+                
+                <div class="pixel-character girl-firstperson" id="girlView"></div>
+
+                <div class="game-choices hidden" id="gameChoices">
+                    <button class="choice-btn accept" onclick="chooseEnding('accept')">Accept Flower 💖</button>
+                    <button class="choice-btn deny" onmouseover="dodgeButton(this)" onclick="chooseEnding('deny')">Deny 😭</button>
+                </div>
+
+                <div class="dialogue-box" id="dialogueBox" onclick="advanceDialogue()">
+                    <div class="dialogue-speaker">Peanut</div>
+                    <div class="dialogue-text" id="dialogueText">Loading memory sequence...</div>
+                    <div class="dialogue-arrow">▼</div>
+                </div>
             </div>
         </div>
 
         <div id="page4" class="page">
             <div class="page-content center">
-                <div class="flower-wrapper large floating">🌸</div>
+                <img src="https://images.unsplash.com/photo-1561181286-d3fee7d55364?q=80&w=400&auto=format&fit=crop" class="peony-img" style="position:static; transform:none; animation:none; margin-bottom:20px; width:120px; border-radius:50%;" alt="Peony">
                 <div class="text-block">
-                    <p>Just like an eternal bloom, these memories will always be special to me. Thank you for everything.</p>
-                    <p class="signature">Love, [Your Name]</p>
+                    <p style="font-size: 1.4rem; font-weight: bold; color: var(--text-color);">Thank you for everything, Kitkat &lt;3</p>
+                    <p style="color: #665; margin-top: 10px;">You are my absolute favorite blessing.</p>
+                    <p class="signature">Forever Yours, Peanut 🎀</p>
                 </div>
             </div>
         </div>
@@ -65,8 +93,7 @@
     <div id="messageModal" class="modal">
         <div class="modal-content">
             <span class="close-btn" onclick="closeMessage()">&times;</span>
-            <div id="modalBody">
-                </div>
+            <div id="modalBody"></div>
         </div>
     </div>
 
