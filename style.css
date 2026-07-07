@@ -1,5 +1,6 @@
 :root {
     --bg-pink: #ffeef2;
+    --glass-shine: rgba(255, 255, 255, 0.45);
     --text-color: #ff6584;
     --primary-color: #ff8ca2;
     --chapter-btn-color: #ffd8df;
@@ -9,15 +10,16 @@ body {
     margin: 0;
     padding: 0;
     min-height: 100vh;
-    background: radial-gradient(circle, #fff5f7 0%, var(--bg-pink) 100%);
+    background: linear-gradient(rgba(255, 245, 247, 0.8), rgba(255, 238, 242, 0.85)), 
+                url('https://images.unsplash.com/photo-1526047932273-341f2a7631f9?q=80&w=1000&auto=format&fit=crop') no-repeat center center/cover;
     display: flex;
     justify-content: center;
     align-items: center;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    overflow: hidden;
+    overflow-x: hidden;
 }
 
-/* Ambient Sparkles Background */
+/* Ambient Sparkles */
 .sparkles-container {
     position: fixed;
     top: 0;
@@ -46,9 +48,9 @@ body {
 .main-container {
     position: relative;
     z-index: 2;
-    width: 90%;
-    max-width: 500px;
-    height: 80vh;
+    width: 95%;
+    max-width: 520px;
+    height: 85vh;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -59,7 +61,7 @@ body {
     position: absolute;
     width: 100%;
     height: 100%;
-    display: none; /* Hide all pages by default */
+    display: none;
     justify-content: center;
     align-items: center;
     opacity: 0;
@@ -67,17 +69,17 @@ body {
 }
 
 .page.active {
-    display: flex; /* Show the active page */
+    display: flex;
     opacity: 1;
 }
 
-/* Common Page Styling */
 .page-content {
-    background: white;
-    padding: 40px;
-    border-radius: 20px;
-    box-shadow: 0 10px 20px rgba(255, 101, 132, 0.1);
-    border: 2px solid #fff0f3;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    padding: 35px;
+    border-radius: 24px;
+    box-shadow: 0 15px 35px rgba(255, 101, 132, 0.15);
+    border: 2px solid rgba(255, 240, 243, 0.8);
     text-align: center;
     width: 100%;
 }
@@ -89,125 +91,231 @@ body {
     align-items: center;
 }
 
-.header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 20px;
-}
+h1, h2 { color: var(--text-color); }
+p { color: #665; line-height: 1.6; }
 
-h1, h2 {
-    color: var(--text-color);
-}
-
-p {
-    color: #665;
-    line-height: 1.6;
-}
-
-/* Flower Emoji Styling */
-.flower-wrapper {
-    user-select: none;
-    line-height: 1;
-    display: inline-block;
-}
-
-.flower-wrapper.large {
-    font-size: 100px;
-    margin-bottom: 20px;
-}
-
-.flower-wrapper.small {
-    font-size: 30px;
-}
-
-.flower-wrapper.floating {
-    animation: floatFlower 4s infinite ease-in-out;
-}
-
-@keyframes floatFlower {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-10px); }
-}
-
-/* Button Styling */
-.primary-btn, .chapter-btn {
-    padding: 10px 20px;
-    border-radius: 25px;
-    border: none;
+/* Dome Setup */
+.dome-container {
+    position: relative;
+    width: 260px;
+    height: 300px;
+    margin: 15px auto;
     cursor: pointer;
-    font-size: 1.1rem;
-    transition: transform 0.2s, background-color 0.2s;
-    font-family: inherit;
 }
 
-.primary-btn {
-    background-color: var(--primary-color);
-    color: white;
-    margin-top: 30px;
+.glass-dome {
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 90%;
+    background: linear-gradient(135deg, rgba(255,255,255,0.4) 0%, rgba(255,255,255,0.1) 100%);
+    border: 2.5px solid rgba(255, 255, 255, 0.7);
+    border-bottom: none;
+    border-radius: 130px 130px 0 0;
+    backdrop-filter: blur(4px);
+    z-index: 5;
+    transition: all 1.2s ease;
 }
 
-.primary-btn:hover {
-    background-color: #ff6584;
+.dome-knob {
+    position: absolute; top: -15px; left: calc(50% - 15px);
+    width: 30px; height: 30px; background: rgba(255, 255, 255, 0.8);
+    border: 2px solid rgba(255, 255, 255, 0.9); border-radius: 50%; z-index: 6;
 }
 
-.chapter-btn {
-    background-color: var(--chapter-btn-color);
-    color: var(--text-color);
-    margin: 10px;
+.dome-base {
+    position: absolute; bottom: 5%; left: -20px;
+    width: 300px; height: 25px;
+    background: linear-gradient(to bottom, #ff9ebb, #ff7b9e);
+    border-radius: 12px; z-index: 4;
 }
 
-.chapter-btn:hover {
-    background-color: #ffd0d8;
+.peony-img {
+    position: absolute; bottom: 14%; left: 50%; transform: translateX(-50%);
+    width: 130px; height: auto; z-index: 3;
+    filter: drop-shadow(0 10px 20px rgba(255, 101, 132, 0.4));
 }
 
-.hidden {
-    display: none;
-}
+.dome-container.opened .glass-dome { transform: translateY(-160px); opacity: 0; }
+.dome-container.opened .dome-knob { opacity: 0; }
 
-/* Modal (Popup) Styling */
-.modal {
-    display: none; /* Hidden by default */
-    position: fixed;
-    z-index: 100;
-    left: 0;
-    top: 0;
+/* --- 🎮 PIXEL RETRO MINIGAME ENGINE VIEWPORT --- */
+.game-viewport {
     width: 100%;
     height: 100%;
-    overflow: auto;
-    background-color: rgba(0, 0, 0, 0.4); /* Black with transparency */
-    justify-content: center;
-    align-items: center;
-    opacity: 0;
-    transition: opacity 0.3s;
-}
-
-.modal.active {
-    display: flex;
-    opacity: 1;
-}
-
-.modal-content {
-    background: white;
-    padding: 30px;
-    border-radius: 15px;
-    max-width: 400px;
-    width: 80%;
+    background: #2c1654; /* Beautiful retro twilight space base color */
+    border: 6px solid #ff8ca2;
+    border-radius: 20px;
     position: relative;
-    text-align: left;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    overflow: hidden;
+    box-shadow: 0 15px 30px rgba(0,0,0,0.3);
 }
 
-.close-btn {
+/* Pixel Art Scenery Layers */
+.pixel-sky {
     position: absolute;
-    right: 15px;
-    top: 5px;
-    font-size: 28px;
-    cursor: pointer;
+    top: 0; left: 0; width: 100%; height: 65%;
+    background: linear-gradient(to bottom, #1d1b46 0%, #632851 40%, #b34257 70%, #e07463 100%);
+    z-index: 1;
 }
 
-.signature {
-    margin-top: 30px;
-    font-style: italic;
-    color: var(--text-color);
+.pixel-sun {
+    position: absolute;
+    bottom: 10px; left: 50%; transform: translateX(-50%);
+    width: 70px; height: 70px;
+    background: #fce68d;
+    border-radius: 50%;
+    box-shadow: 0 0 25px #e07463;
 }
+
+.pixel-mountains {
+    position: absolute;
+    bottom: 35%; left: 0; width: 200%; height: 35%;
+    background: repeating-linear-gradient(90deg, #441c42 0px, #441c42 40px, #311333 40px, #311333 80px);
+    clip-path: polygon(0% 100%, 15% 30%, 30% 70%, 45% 20%, 60% 75%, 75% 40%, 90% 80%, 100% 100%);
+    z-index: 2;
+}
+
+.pixel-ground {
+    position: absolute;
+    bottom: 0; left: 0; width: 200%; height: 40%;
+    background: #211c27;
+    border-top: 5px solid #473b4e;
+    z-index: 3;
+}
+
+/* Scrolling effect during walk scene */
+.game-viewport.scrolling .pixel-mountains {
+    animation: scrollBg 8s linear infinite;
+}
+.game-viewport.scrolling .pixel-ground {
+    animation: scrollBg 4s linear infinite;
+}
+
+@keyframes scrollBg {
+    100% { transform: translateX(-50%); }
+}
+
+/* Character Sprites (Chibi Pixel Vibe) */
+.pixel-character {
+    position: absolute;
+    bottom: 25%;
+    z-index: 5;
+    image-rendering: pixelated;
+    transition: all 1s ease-in-out;
+}
+
+/* Boy avatar setup (Walking up in front of her) */
+#boyCharacter {
+    left: -50px;
+    width: 50px;
+    height: 75px;
+}
+
+.boy-sprite {
+    width: 100%;
+    height: 100%;
+    background: #ff8ca2;
+    clip-path: polygon(30% 0%, 70% 0%, 80% 20%, 80% 40%, 70% 50%, 90% 60%, 80% 80%, 70% 100%, 30% 100%, 20% 80%, 10% 60%, 30% 50%, 20% 40%, 20% 20%);
+    position: relative;
+}
+
+/* Floating Peony Popup item */
+.pixel-peony {
+    position: absolute;
+    top: -45px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 2.2rem;
+    animation: floatFlower 2s infinite ease-in-out;
+}
+
+/* Custom 1st Person POV Frame for Brooke */
+#girlView {
+    right: 30px;
+    bottom: 15%;
+    width: 80px;
+    height: 100px;
+    background: transparent;
+    border: 4px solid rgba(255,255,255,0.1);
+    pointer-events: none;
+}
+
+/* --- 💬 RETRO RPG DIALOGUE TEXT BOX --- */
+.dialogue-box {
+    position: absolute;
+    bottom: 12px; left: 4%; width: 92%;
+    height: 110px;
+    background: rgba(16, 12, 26, 0.95);
+    border: 3px solid #ff8ca2;
+    border-radius: 12px;
+    z-index: 10;
+    padding: 12px;
+    box-sizing: border-box;
+    cursor: pointer;
+    user-select: none;
+}
+
+.dialogue-speaker {
+    color: #ff8ca2;
+    font-weight: bold;
+    font-size: 0.95rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 4px;
+    font-family: 'Courier New', Courier, monospace;
+}
+
+.dialogue-text {
+    color: #ffffff;
+    font-size: 0.95rem;
+    line-height: 1.4;
+    font-family: 'Courier New', Courier, monospace;
+}
+
+.dialogue-arrow {
+    position: absolute;
+    bottom: 6px; right: 12px;
+    color: #ff8ca2;
+    font-size: 0.8rem;
+    animation: bounceArrow 0.8s infinite alternate;
+}
+
+@keyframes bounceArrow { 100% { transform: translateY(4px); } }
+
+/* Game Action Decision Controls */
+.game-choices {
+    position: absolute;
+    top: 35%; left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 20;
+    display: flex;
+    flex-direction: column;
+    width: 70%;
+}
+
+.choice-btn {
+    padding: 12px;
+    margin: 8px 0;
+    border: 3px solid white;
+    border-radius: 10px;
+    font-family: 'Courier New', Courier, monospace;
+    font-weight: bold;
+    cursor: pointer;
+    transition: transform 0.1s;
+}
+
+.choice-btn.accept { background: #4caf50; color: white; }
+.choice-btn.deny { background: #f44336; color: white; position: relative; }
+
+/* System Classes */
+.primary-btn, .chapter-btn { padding: 12px 24px; border-radius: 25px; border: none; cursor: pointer; font-weight: 600; font-family: inherit; }
+.primary-btn { background-color: var(--primary-color); color: white; margin-top: 25px; }
+.chapter-btn { background-color: var(--chapter-btn-color); color: var(--text-color); margin: 10px; width: 80%; }
+.chapters-grid { display: flex; flex-direction: column; align-items: center; margin: 20px 0; }
+.hidden { display: none !important; }
+
+/* Modal Setup */
+.modal { display: none; position: fixed; z-index: 100; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.35); backdrop-filter: blur(5px); justify-content: center; align-items: center; opacity: 0; transition: opacity 0.3s; }
+.modal.active { display: flex; opacity: 1; }
+.modal-content { background: white; padding: 30px; border-radius: 20px; max-width: 360px; width: 85%; position: relative; text-align: center; }
+.close-btn { position: absolute; right: 15px; top: 10px; font-size: 28px; color: #aaa; cursor: pointer; }
+.signature { margin-top: 30px; font-size: 1.2rem; font-weight: bold; color: var(--text-color); }
