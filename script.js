@@ -1,4 +1,3 @@
-// Generate background ambiance particles
 const sparklesContainer = document.getElementById('sparkles');
 for (let i = 0; i < 30; i++) {
     const sparkle = document.createElement('div');
@@ -11,13 +10,12 @@ for (let i = 0; i < 30; i++) {
 
 const openedMessages = { chapter1: false, chapter2: false, chapter3: false };
 
-// Script Timeline configuration
 let dialogueScript = [
     { text: "Hey Brooke... click or tap on this box to read along with me.", action: "enter-scene" },
     { text: "I wanted to step away from normal texts and build something special, just for you." },
     { text: "Honestly... out of every single thing that has ever happened in my life, meeting you is easily the best one." },
     { text: "Come with me for a second, let's head up to the peak over here...", action: "move-top" },
-    { text: "Look out at that sunset... standing right up here on top of the world with you is amazing." },
+    { text: "Look out at that sunset... standing right up here on top of the world with you is amazing.", action: "reveal-brooke" },
     { text: "But honestly? Even with a view like this right in front of us... I'd still rather just look at you." },
     { text: "You have the kindest heart of anyone I know, and you deserve something that stays beautiful.", action: "reveal-bouquet" },
     { text: "So... I brought your absolute favorite flowers. Will you accept them from me?", action: "prompt-choices" }
@@ -66,22 +64,23 @@ function openMessage(id) {
 
 function closeMessage() { document.getElementById('messageModal').classList.remove('active'); }
 
-// --- 🎮 CINEMATIC SCENE CONTROLLER ---
 function runCutsceneStep() {
     if (currentLine >= dialogueScript.length) return;
     const step = dialogueScript[currentLine];
     document.getElementById('dialogueText').innerText = step.text;
 
     if (step.action === "enter-scene") {
-        const character = document.getElementById('boyCharacter');
-        character.style.opacity = "1";
-        character.style.left = "40%";
+        const boy = document.getElementById('boyCharacter');
+        boy.style.left = "25%";
     } 
     else if (step.action === "move-top") {
-        // Simulates walking up to the peak by adjusting scale and background placement
-        document.getElementById('boyCharacter').style.bottom = "38%";
-        document.getElementById('boyCharacter').style.left = "45%";
+        const boy = document.getElementById('boyCharacter');
+        boy.style.bottom = "28%";
+        boy.style.left = "38%";
     } 
+    else if (step.action === "reveal-brooke") {
+        document.getElementById('girlCharacter').classList.remove('hidden');
+    }
     else if (step.action === "reveal-bouquet") {
         document.getElementById('pixelPeony').classList.remove('hidden');
     } 
@@ -98,17 +97,20 @@ function advanceDialogue() {
 }
 
 function dodgeButton(btn) {
-    const x = Math.floor(Math.random() * 60) - 30;
-    const y = Math.floor(Math.random() * 60) - 30;
+    const x = Math.floor(Math.random() * 80) - 40;
+    const y = Math.floor(Math.random() * 80) - 40;
     btn.style.transform = `translate(${x}px, ${y}px)`;
 }
 
 function chooseEnding(choice) {
     if (choice === 'accept') {
         document.getElementById('gameChoices').classList.add('hidden');
+        
+        // Triggers the 3D Perspective camera pullback zoom-out animation sequence
         document.getElementById('gameViewport').classList.add('cinematic-zoom');
+        
         document.getElementById('dialogueBox').style.pointerEvents = "auto";
-        document.getElementById('dialogueText').innerText = "*You took the pink peonies. We sat together on top of the mountain, looking out at the sunset view...* Click to finish.";
+        document.getElementById('dialogueText').innerText = "*You took the pink peonies. We sat down together on top of the mountain peak, looking out at the sunset view...* Click to continue.";
         document.getElementById('dialogueBox').onclick = () => { goToPage(4); };
     }
 }
