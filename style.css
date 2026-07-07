@@ -1,0 +1,213 @@
+:root {
+    --bg-pink: #ffeef2;
+    --text-color: #ff6584;
+    --primary-color: #ff8ca2;
+    --chapter-btn-color: #ffd8df;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    background: radial-gradient(circle, #fff5f7 0%, var(--bg-pink) 100%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    overflow: hidden;
+}
+
+/* Ambient Sparkles Background */
+.sparkles-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.sparkle {
+    position: absolute;
+    background: #fff;
+    border-radius: 50%;
+    animation: floatSparkle 6s infinite ease-in-out;
+    opacity: 0.6;
+}
+
+@keyframes floatSparkle {
+    0% { transform: translateY(100vh) scale(0); opacity: 0; }
+    50% { opacity: 0.8; }
+    100% { transform: translateY(-10vh) scale(1); opacity: 0; }
+}
+
+/* Main Container Setup */
+.main-container {
+    position: relative;
+    z-index: 2;
+    width: 90%;
+    max-width: 500px;
+    height: 80vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Page Control */
+.page {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    display: none; /* Hide all pages by default */
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    transition: opacity 0.8s ease-in-out;
+}
+
+.page.active {
+    display: flex; /* Show the active page */
+    opacity: 1;
+}
+
+/* Common Page Styling */
+.page-content {
+    background: white;
+    padding: 40px;
+    border-radius: 20px;
+    box-shadow: 0 10px 20px rgba(255, 101, 132, 0.1);
+    border: 2px solid #fff0f3;
+    text-align: center;
+    width: 100%;
+}
+
+.page-content.center {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+h1, h2 {
+    color: var(--text-color);
+}
+
+p {
+    color: #665;
+    line-height: 1.6;
+}
+
+/* Flower Emoji Styling */
+.flower-wrapper {
+    user-select: none;
+    line-height: 1;
+    display: inline-block;
+}
+
+.flower-wrapper.large {
+    font-size: 100px;
+    margin-bottom: 20px;
+}
+
+.flower-wrapper.small {
+    font-size: 30px;
+}
+
+.flower-wrapper.floating {
+    animation: floatFlower 4s infinite ease-in-out;
+}
+
+@keyframes floatFlower {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+}
+
+/* Button Styling */
+.primary-btn, .chapter-btn {
+    padding: 10px 20px;
+    border-radius: 25px;
+    border: none;
+    cursor: pointer;
+    font-size: 1.1rem;
+    transition: transform 0.2s, background-color 0.2s;
+    font-family: inherit;
+}
+
+.primary-btn {
+    background-color: var(--primary-color);
+    color: white;
+    margin-top: 30px;
+}
+
+.primary-btn:hover {
+    background-color: #ff6584;
+}
+
+.chapter-btn {
+    background-color: var(--chapter-btn-color);
+    color: var(--text-color);
+    margin: 10px;
+}
+
+.chapter-btn:hover {
+    background-color: #ffd0d8;
+}
+
+.hidden {
+    display: none;
+}
+
+/* Modal (Popup) Styling */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed;
+    z-index: 100;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.4); /* Black with transparency */
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+.modal.active {
+    display: flex;
+    opacity: 1;
+}
+
+.modal-content {
+    background: white;
+    padding: 30px;
+    border-radius: 15px;
+    max-width: 400px;
+    width: 80%;
+    position: relative;
+    text-align: left;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+.close-btn {
+    position: absolute;
+    right: 15px;
+    top: 5px;
+    font-size: 28px;
+    cursor: pointer;
+}
+
+.signature {
+    margin-top: 30px;
+    font-style: italic;
+    color: var(--text-color);
+}

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A Story For You 🌸</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="sparkles-container" id="sparkles"></div>
+
+    <div class="main-container">
+
+        <div id="page1" class="page active">
+            <div class="page-content center">
+                <div class="flower-wrapper large floating">🌸</div>
+                <h1>A story for you, Brooke.</h1>
+                <button class="primary-btn" onclick="goToPage(2)">Open Your Gift →</button>
+            </div>
+        </div>
+
+        <div id="page2" class="page">
+            <div class="page-content">
+                <div class="header">
+                    <div class="flower-wrapper small">🌸</div>
+                    <h2>Moments in Bloom</h2>
+                    <div class="flower-wrapper small">🌸</div>
+                </div>
+                <div class="text-block">
+                    <p>
+                        I made this because peonies represent love, happiness, and beauty—just like these memories with you. 
+                        They're classic and gorgeous, which reminds me of you.
+                    </p>
+                </div>
+                <button class="primary-btn" onclick="goToPage(3)">Next Page →</button>
+            </div>
+        </div>
+
+        <div id="page3" class="page">
+            <div class="page-content">
+                <h2>Our Chapters</h2>
+                <div class="chapters-grid">
+                    <button class="chapter-btn" onclick="openMessage('chapter1')">Chapter 1</button>
+                    <button class="chapter-btn" onclick="openMessage('chapter2')">Chapter 2</button>
+                    <button class="chapter-btn" onclick="openMessage('chapter3')">Chapter 3</button>
+                </div>
+                <div class="hint text-block">Open all three to unlock the final page 🎀</div>
+                <button id="finalPageBtn" class="primary-btn hidden" onclick="goToPage(4)">Final Page →</button>
+            </div>
+        </div>
+
+        <div id="page4" class="page">
+            <div class="page-content center">
+                <div class="flower-wrapper large floating">🌸</div>
+                <div class="text-block">
+                    <p>Just like an eternal bloom, these memories will always be special to me. Thank you for everything.</p>
+                    <p class="signature">Love, [Your Name]</p>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div id="messageModal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeMessage()">&times;</span>
+            <div id="modalBody">
+                </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
